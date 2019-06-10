@@ -32,9 +32,9 @@ void People::movePeople() {
      
     }
 
-    if( y >= 51  ) {
-        yVectora *= -1;
-    }
+    // if( y >= 51  ) {
+    //     yVectora *= -1;
+    // }
 
    if(y <= 0){
         yVectora *= -1;
@@ -46,6 +46,11 @@ void People::movePeople() {
 void People::drawPeople() {
     move(x,y);
     printw("p");
+
+    if(y==51){
+        move(x,y);
+        printw("");
+    }
  }
 
 void People::enterProm(){

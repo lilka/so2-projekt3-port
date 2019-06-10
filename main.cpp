@@ -107,6 +107,7 @@ void movePeople(People *people){
      usleep(90000);
  }
     if(people->y==51){
+        
         peoples.erase(std::remove(peoples.begin(), peoples.end(), people), peoples.end());
     }
      
@@ -130,7 +131,7 @@ void makeNewPeople(){
         peopleQueue.enqueue(people);
         
         
-        usleep(5000000);
+        usleep(1000000);
 
 
 

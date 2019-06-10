@@ -40,7 +40,7 @@ void Prom::moveProm() {
     
     }
     if (y==138){
-        
+        numberOfPeople=0;
     }
    
 }
@@ -62,13 +62,39 @@ void Prom::drawProm() {
             move(27,57);
            printw("(ppp      )");
            }
+        if(numberOfPeople==4){
+            move(27,57);
+           printw("(pppp     )");
+           }
+        if(numberOfPeople==5){
+            move(27,57);
+           printw("(ppppp     )");
+           }
+        if(numberOfPeople==6){
+            move(27,57);
+           printw("(ppppp     )");
+           }
+        if(numberOfPeople==7){
+            move(27,57);
+           printw("(pppppp    )");
+           }
+         if(numberOfPeople==8){
+            move(27,57);
+           printw("(ppppppp    )");
+           }
+        if(numberOfPeople==9){
+            move(27,57);
+           printw("(pppppppp    )");
+           }
+        
+         
          
         
     }
     else if(isFull()==true){
         move(x,y);
-        printw("(pppp    )");
-        moveProm();
+        printw("(pppppppp    )");
+       
     }
     else{
     move(x,y);
@@ -82,7 +108,7 @@ void Prom::drawProm() {
  }
 
 bool Prom::isFull(){
-    return this->numberOfPeople==4;  
+    return this->numberOfPeople==10;  
 }
 
  bool Prom::promIsByTheShore(){
@@ -97,6 +123,6 @@ bool Prom::isFull(){
 
  void Prom::addPassanger(){
       numberOfPeople++; 
-      d
+      
  }
 
