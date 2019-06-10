@@ -1,7 +1,7 @@
 #include "Screen.h"
 #include "River.h"
 #include "Prom.h"
-#include "People.h"
+#include "Passanger.h"
 #include <mutex>
 #include <thread>
 #include <vector>
@@ -20,8 +20,8 @@ River *river;
 Prom *prom;
 bool flag = true;
 vector<thread> threads;
-vector<People*> peoples;
-SafeQueue<People*> peopleQueue; 
+vector<Passanger*> Passangers;
+SafeQueue<Passanger*> PassangerQueue; 
 
 
 
@@ -34,8 +34,8 @@ void refreshScreen(){
             river->drawSecondRiver();
             river->drawPort();
             prom->drawProm();
-                for (int i = 0; i < peoples.size(); i++) {
-                        peoples[i]->drawPeople();
+                for (int i = 0; i < Passangers.size(); i++) {
+                        Passangers[i]->drawPassanger();
                  }
                  
         refresh();
@@ -66,9 +66,9 @@ void makeRiver(){
 
 void moveProm(Prom *prom){
  while((flag)){
-     if(prom->shouldWaitForPeople()){
+     if(prom->shouldWaitForPassanger()){
          for (int i=0; i<5; i++){
-             People* passanger=peopleQueue.dequeue();
+             Passanger* passanger=PassangerQueue.dequeue();
              passanger->enterProm();
              prom->addPassanger();
              }
@@ -93,27 +93,26 @@ void makeNewProm(){
 }
 
 
-void movePeople(People *people){
- while((flag && !people->isOnProm())){
+void movePassanger(Passanger *passanger){
+ while((flag && !passanger->isOnProm())  ){
     ofstream myfile;
     myfile.open ("output.txt");
     myfile << "Writing this to a file.\n";
     myfile<<"Prom pos x"<<prom->x<<"lift pos y"<<prom->y<<endl; 
-    myfile<<"Ball pos x"<<people->x<<"ball pos y"<<people->y<<endl; 
-    myfile<<"Queue"<<peopleQueue.q.size();
+    myfile<<"Ball pos x"<<passanger->x<<"ball pos y"<<passanger->y<<endl; 
+    myfile<<"Queue"<<PassangerQueue.q.size();
     myfile.close();
      
-     people->movePeople();
+     passanger->movePassanger();
      usleep(90000);
  }
-    if(people->y==51){
-        
-        peoples.erase(std::remove(peoples.begin(), peoples.end(), people), peoples.end());
-    }
+    
+        Passangers.erase(std::remove(Passangers.begin(), Passangers.end(), passanger), Passangers.end());
+    
      
 }
 
-void makeNewPeople(){
+void makeNewPassanger(){
 
     float x = screen->getScreenWidth();
     float y = screen->getScreenHeight();
@@ -124,11 +123,12 @@ void makeNewPeople(){
     {
 
         tmp = rand() % 8 +1;
-        People *people = new People(x, y);
-        peoples.push_back(people);
+        Passanger *passanger = new Passanger(x, y);
+        Passangers.push_back(passanger);
    
-        threads.push_back(thread(movePeople, peoples.back()));
-        peopleQueue.enqueue(people);
+        threads.push_back(thread(movePassanger, Passangers.back()));
+        PassangerQueue.enqueue(passanger);
+        passanger->isInQueue=true;
         
         
         usleep(1000000);
@@ -146,14 +146,14 @@ int main() {
     srand(time(NULL));
     screen= new Screen();
     thread generateNewProm(makeNewProm);
-    thread generateNewPeople(makeNewPeople);
+    thread generateNewPassanger(makeNewPassanger);
     thread generateriver(makeRiver);
     thread refreshScreenThread(refreshScreen);
     thread escapeThread(escape);
     
     
     escapeThread.join();
-    generateNewPeople.join();
+    generateNewPassanger.join();
     refreshScreenThread.join();
     generateriver.join();
     generateNewProm.join();

@@ -1,4 +1,4 @@
 Writing this to a file.
-Prom pos x0lift pos y82
-Ball pos x28ball pos y33
-Queue10
+Prom pos x0lift pos y115
+Ball pos x20ball pos y61
+Queue39

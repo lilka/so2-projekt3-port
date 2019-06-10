@@ -1,6 +1,6 @@
 
 
-class People{
+class Passanger{
 public:
     int x, y; 
     float screenX, screenY;
@@ -8,12 +8,14 @@ public:
     int xVectora, yVectora;
     bool used=false;
     bool inProm=false;
+    bool isInQueue=false; 
     
 
-    People( int, int);
-    void movePeople();
-    void drawPeople();
+    Passanger( int, int);
+    void movePassanger();
+    void drawPassanger();
     void enterProm(); 
     bool isOnProm(); 
+    void deletePassanger();
 
 };

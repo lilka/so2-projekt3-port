@@ -103,7 +103,7 @@ void Prom::drawProm() {
 
  }
 
- bool Prom::shouldWaitForPeople(){
+ bool Prom::shouldWaitForPassanger(){
      return !isFull() && promIsByTheShore(); 
  }
 

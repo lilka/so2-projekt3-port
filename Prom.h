@@ -24,7 +24,7 @@ public:
     bool promIsByTheShore();
     void promToPort();
     void addPassanger(); 
-    bool shouldWaitForPeople();
+    bool shouldWaitForPassanger();
     
 
 };
