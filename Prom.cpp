@@ -127,3 +127,7 @@ bool Prom::isFull(){
       
  }
 
+ int Prom::getPromId(){
+     return id; 
+ }
+

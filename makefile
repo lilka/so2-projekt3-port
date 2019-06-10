@@ -1,5 +1,5 @@
-main: Screen.o River.o Prom.o Passanger.o  main.cpp
-	g++ -std=c++11 Screen.o River.o Prom.o Passanger.o  main.cpp -lncurses -pthread -fpermissive
+main: Screen.o River.o Prom.o Passanger.o Port.o main.cpp
+	g++ -std=c++11 Screen.o River.o Prom.o Passanger.o Port.o main.cpp -lncurses -pthread -fpermissive
 
 Screen.o: Screen.cpp Screen.h
 	g++  -c Screen.cpp -std=c++11 -lncurses -fpermissive
@@ -15,6 +15,9 @@ Passanger.o:Passanger.cpp Passanger.h
 
 SafeQueue.o: SafeQueue.cpp
 	g++ -c SafeQueue.cpp -std=c++11 -lncurses -fpermissive
+
+Port.o:Port.cpp Port.h
+	g++  -c Port.cpp -std=c++11 -lncurses -fpermissive
 
 clean:
 	rm -f *.o test

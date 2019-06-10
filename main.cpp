@@ -11,14 +11,15 @@
 #include <string>
 #include <unistd.h>
 #include "SafeQueue.cpp"
+#include "Port.h"
 
 
 using namespace std;
 
 Screen *screen;
 River *river;
+Port* port=new Port();
 //Prom *prom;
-int id=0;
 bool flag = true;
 vector<thread> threads;
 vector<Passanger*> passangers;
@@ -36,7 +37,7 @@ void refreshScreen(){
         clear();
             river->drawRiver();
             river->drawSecondRiver();
-            river->drawPort();
+            port->drawPort();
             for(int i=0; i<promThreads.size(); i++){
                         proms[i]->drawProm();
             }
@@ -68,6 +69,10 @@ void makeRiver(){
      river = new River(x, y);
      usleep(50000);
 
+}
+
+void makePort(){
+    port=new Port();
 }
 
 void moveProm(Prom *prom){

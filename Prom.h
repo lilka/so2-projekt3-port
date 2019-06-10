@@ -26,6 +26,8 @@ public:
     void promToPort();
     void addPassanger(); 
     bool shouldWaitForPassanger();
+    int getPromId();
+  
     
 
 };
