@@ -32,7 +32,7 @@ void Passanger::movePassanger() {
      
     }
 
-    if( y > 51  ) {
+    if( y  > 51  ) {
          yVectora *= -1;
      }
 
@@ -41,13 +41,13 @@ void Passanger::movePassanger() {
         
     }
 
-    if(isInQueue && isOnProm()){
-        deletePassanger();
-    }
+    // if(isInQueue && isOnProm()){
+    //     deletePassanger();
+    // }
     if(isInQueue && y==51){
          y=60;
-         x=20; 
-    }
+          x=20; 
+     }
 }
 
 void Passanger::drawPassanger() {
@@ -61,10 +61,10 @@ void Passanger::drawPassanger() {
  }
  
 
-void Passanger::enterProm(){
-    inProm=true;
-}
-bool Passanger::isOnProm(){
-    return this->inProm;
-}
+// void Passanger::enterProm(){
+//     inProm=true;
+// }
+// bool Passanger::isOnProm(){
+//     return this->inProm;
+// }
  

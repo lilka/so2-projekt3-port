@@ -6,6 +6,7 @@
 class Prom {
 public:
     int x, y; 
+    int id;
     float screenX, screenY;
     //wspolrzedne wektora przesuniecia
     int xVectora, yVectora;
@@ -16,7 +17,7 @@ public:
 
     
 
-    Prom( int, int);
+    Prom( int, int, int);
     ~Prom();
     void moveProm();
     void drawProm();
