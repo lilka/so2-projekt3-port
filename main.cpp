@@ -71,10 +71,6 @@ void makeRiver(){
 
 }
 
-void makePort(){
-    port=new Port();
-}
-
 void moveProm(Prom *prom){
  while((flag)){
     //  if(prom->shouldWaitForPassanger()){
