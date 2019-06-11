@@ -54,7 +54,7 @@ void Passanger::movePassanger() {
 
     if(y==60){
        y=60;
-        x=20;
+       x=20;
     }
 }
 

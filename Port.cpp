@@ -18,6 +18,9 @@ void Port::drawPort(){
         move(32, 55+i);
         printw("-");
     }
+
+    move(17,60);
+    printw("Queue");
 }
 
  int Port::getPromInsideId(){
