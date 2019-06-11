@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <algorithm>
 #include "Port.h"
 #include "Prom.h"
 
@@ -43,21 +44,26 @@ int Port::releasePassangers(int max) {
   return released;
 }
 
-void Port::packProm(Prom* prom) {
+void Port::enqueue(Prom* newProm) {
   promMutex.lock();
 
-  if (promInside == NULL)
-    promInside = prom;
+  addProm(newProm);
 
-  if (promInside == prom) {
-    int releasedPassangers = releasePassangers(prom->getSeatsLeft());
-    prom->addPassangers(releasedPassangers);
+  Prom* prom = proms.front();
 
-    if (prom->isFull()) {
-      promInside = NULL;
-    }
+  int releasedPassangers = releasePassangers(prom->getSeatsLeft());
+  prom->addPassangers(releasedPassangers);
+
+  if (prom->isFull()) {
+    proms.pop_front();
   }
 
   promMutex.unlock();
 }
 
+void Port::addProm(Prom *prom) {
+  bool exists = std::find(proms.begin(), proms.end(), prom) != proms.end();
+
+  if (!exists)
+    proms.push_back(prom);
+}

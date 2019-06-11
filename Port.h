@@ -2,16 +2,18 @@
 #define PORT_H
 
 #include <mutex>
+#include <deque>
 #include "Prom.h"
 
 class Port{
-  std::mutex promMutex;
   int passangerCount = 0;
-  Prom* promInside = NULL;
+  std::mutex promMutex;
+  std::deque<Prom*> proms;
+  void addProm(Prom*);
 public:
   Port();
   void draw(); 
-  void packProm(Prom* p);
+  void enqueue(Prom* p);
   void addPassanger();
   int releasePassangers(int max);
 };

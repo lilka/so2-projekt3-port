@@ -1,7 +1,7 @@
 #include <ncurses.h>
 #include "Prom.h"
 
-const int PASSANGERS_MAX = 3;
+const int PASSANGERS_MAX = 10;
 
 Prom::Prom( int initX, int initY, int newId) {
    

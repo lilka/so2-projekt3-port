@@ -74,7 +74,7 @@ void makeRiver(){
 void moveProm(Prom *prom){
   while((flag)){
     if(prom->shouldWaitForPassangers()) {
-      port->packProm(prom);
+      port->enqueue(prom);
     } else {
       prom->moveProm();
       usleep(90000);
