@@ -41,7 +41,7 @@ void Prom::moveProm() {
     
     }
     if (y==138){
-       // numberOfPeople=0;
+       passangerCount = 0;
     }
    
 }
