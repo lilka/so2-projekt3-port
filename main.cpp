@@ -23,9 +23,9 @@ vector<thread> threads;
 vector<Passanger*> passangers;
 SafeQueue<Passanger*> PassangerQueue; 
 vector<Prom*> proms {
-  new Prom(7, 70, 0),
-  new Prom(21, 90, 1),
-  new Prom(42, 138, 2)
+  new Prom(7, 70),
+  new Prom(21, 90),
+  new Prom(42, 138)
 };
 vector<thread> promThreads;
 SafeQueue<Prom*> promsQueue; 

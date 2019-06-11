@@ -3,7 +3,7 @@
 
 const int PASSANGERS_MAX = 10;
 
-Prom::Prom( int initX, int initY, int newId) {
+Prom::Prom( int initX, int initY ) {
    
 
     screenX = initX;
@@ -12,7 +12,6 @@ Prom::Prom( int initX, int initY, int newId) {
     x=initX;
     y =initY;
     
-    id=newId;
     xVectora = 0;
     yVectora = -1;
 
@@ -75,12 +74,6 @@ bool Prom::isFull(){
    return y == 69;
 }
 
- void Prom::promToPort(){
-     move(27,57);
-     printw("(            )");
-     inPort=true;
- }
-
  void Prom::addPassangers(int count){
    passangerCount += count;
  }
@@ -88,8 +81,3 @@ bool Prom::isFull(){
 int Prom::getSeatsLeft() {
   return PASSANGERS_MAX - passangerCount;
 }
-
- int Prom::getPromId(){
-     return id; 
- }
-
