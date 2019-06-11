@@ -17,5 +17,6 @@ public:
    // void enterProm(); 
    // bool isOnProm(); 
     void deletePassanger();
+    void goToQueue();
 
 };

@@ -44,10 +44,18 @@ void Passanger::movePassanger() {
     // if(isInQueue && isOnProm()){
     //     deletePassanger();
     // }
-    if(isInQueue && y==51){
-         y=60;
-          x=20; 
-     }
+    if(isInQueue && y>=51 && y<=60 && x>=20){
+         y++; 
+         x--;
+         
+         
+         
+    }
+
+    if(y==60){
+       y=60;
+        x=20;
+    }
 }
 
 void Passanger::drawPassanger() {
@@ -58,6 +66,14 @@ void Passanger::drawPassanger() {
 
  void Passanger::deletePassanger(){
      printw(" ");
+ }
+
+ void Passanger::goToQueue(){
+     for(int i =0; i<9; i++){
+         y=y+i; 
+         move(x,y);
+         printw("p");
+     }
  }
  
 

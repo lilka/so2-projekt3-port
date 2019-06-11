@@ -1,3 +1,3 @@
 Writing this to a file.
-Ball pos x28ball pos y8
-Queue17Queue proms3
+Ball pos x19ball pos y62
+Queue12Queue proms3
