@@ -47,14 +47,8 @@ void Passanger::drawPassanger() {
 
  }
 
- void Passanger::deletePassanger(){
-     printw(" ");
- }
- 
-
 bool Passanger::enterPort(Port *port) {
-  if (!isInQueue && y == 51) {
-    isInQueue = true;
+  if (y == 51) {
     port->addPassanger();
     return true;
   }

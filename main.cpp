@@ -21,7 +21,6 @@ Port* port=new Port();
 bool flag = true;
 vector<thread> threads;
 vector<Passanger*> passangers;
-SafeQueue<Passanger*> PassangerQueue; 
 vector<Prom*> proms {
   new Prom(7, 70),
   new Prom(21, 90),
@@ -90,21 +89,21 @@ void initProms(){
 }
 
 void movePassanger(Passanger *passanger){
- while(flag
-  //&&  !passanger->isOnProm())  
-  ){
+ while(flag) {
     ofstream myfile;
     myfile.open ("output.txt");
     myfile<<"X: "<<proms[0]->x<< " Y: "<<proms[0]->y<<endl; 
-    //myfile<<"Queue"<<PassangerQueue.q.size();
     //myfile<<"Queue proms"<<promsQueue.q.size();
     myfile.close();
      
-    passanger->movePassanger();
     if(passanger->enterPort(port)) {
       passangers.erase(std::remove(passangers.begin(), passangers.end(), passanger), passangers.end());
+      return;
     }
-     usleep(90000);
+    else {
+      passanger->movePassanger();
+      usleep(90000);
+    }
  }
 }
 
@@ -121,8 +120,7 @@ void makeNewPassanger(){
         Passanger *passanger = new Passanger(x, y);
         passangers.push_back(passanger);
    
-        threads.push_back(thread(movePassanger, passangers.back()));
-        PassangerQueue.enqueue(passanger);
+        threads.push_back(thread(movePassanger, passanger));
 
         usleep(2000000);
     }
@@ -132,17 +130,16 @@ int main() {
     srand(time(NULL));
     screen= new Screen();
     initProms();
+    makeRiver();
     thread generateNewPassanger(makeNewPassanger);
-    thread generateriver(makeRiver);
     thread refreshScreenThread(refreshScreen);
     thread escapeThread(escape);
     
     escapeThread.join();
     generateNewPassanger.join();
     refreshScreenThread.join();
-    generateriver.join();
   
-   for(int i=0; i<3;i++){
+   for(int i=0; i<promThreads.size();i++){
         promThreads[i].join();
     }
 
