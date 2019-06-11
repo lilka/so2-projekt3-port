@@ -1,7 +1,5 @@
-
 #include <vector> 
-
-
+#include "Port.h"
 
 class Prom {
 public:
@@ -27,7 +25,7 @@ public:
     void addPassanger(); 
     bool shouldWaitForPassanger();
     int getPromId();
-  
+    bool enterPort(Port*);  
     
 
 };

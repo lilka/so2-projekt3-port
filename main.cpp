@@ -36,7 +36,7 @@ void refreshScreen(){
       clear();
       river->drawRiver();
       river->drawSecondRiver();
-      port->drawPort();
+      port->draw();
       for(int i=0; i<promThreads.size(); i++){
         proms[i]->drawProm();
       }
@@ -72,21 +72,11 @@ void makeRiver(){
 }
 
 void moveProm(Prom *prom){
- while((flag)){
-    //  if(prom->shouldWaitForPassanger()){
-    //      for (int i=0; i<5; i++){
-    //          Passanger* passanger=PassangerQueue.dequeue();
-    //         // passanger->enterProm();
-    //          prom->addPassanger();
-    //          }
-    // }
-    // else{
-     prom->moveProm();
-     usleep(90000);
-     }
-    
- }
-//}
+  while((flag)){
+    prom->moveProm();
+    usleep(90000);
+  }
+}
 
 void initProms(){
   for(int i=0; i<proms.size();i++){
@@ -107,11 +97,12 @@ void movePassanger(Passanger *passanger){
     myfile<<"Queue proms"<<promsQueue.q.size();
     myfile.close();
      
-     passanger->movePassanger();
+    passanger->movePassanger();
+    if(passanger->enterPort(port)) {
+      passangers.erase(std::remove(passangers.begin(), passangers.end(), passanger), passangers.end());
+    }
      usleep(90000);
  }
-    
- passangers.erase(std::remove(passangers.begin(), passangers.end(), passanger), passangers.end());
 }
 
 void makeNewPassanger(){
@@ -129,8 +120,7 @@ void makeNewPassanger(){
    
         threads.push_back(thread(movePassanger, passangers.back()));
         PassangerQueue.enqueue(passanger);
-        passanger->isInQueue=true;
-        
+
         usleep(2000000);
     }
 }

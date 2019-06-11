@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include "Passanger.h"
+#include "Port.h"
 
 Passanger::Passanger( int initX, int initY) {
    
@@ -17,8 +18,6 @@ Passanger::Passanger( int initX, int initY) {
 }
 
 void Passanger::movePassanger() {
-   
-
      x += xVectora;
     y += yVectora;
 
@@ -40,14 +39,6 @@ void Passanger::movePassanger() {
         yVectora *= -1;
         
     }
-
-    // if(isInQueue && isOnProm()){
-    //     deletePassanger();
-    // }
-    if(isInQueue && y==51){
-         y=60;
-          x=20; 
-     }
 }
 
 void Passanger::drawPassanger() {
@@ -61,10 +52,12 @@ void Passanger::drawPassanger() {
  }
  
 
-// void Passanger::enterProm(){
-//     inProm=true;
-// }
-// bool Passanger::isOnProm(){
-//     return this->inProm;
-// }
- 
+bool Passanger::enterPort(Port *port) {
+  if (!isInQueue && y == 51) {
+    isInQueue = true;
+    port->addPassanger();
+    return true;
+  }
+
+  return false;
+}

@@ -1,4 +1,4 @@
-
+#include "Port.h"
 
 class Passanger{
 public:
@@ -17,5 +17,5 @@ public:
    // void enterProm(); 
    // bool isOnProm(); 
     void deletePassanger();
-
+    bool enterPort(Port*);
 };

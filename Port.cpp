@@ -3,7 +3,7 @@
 
 Port::Port(){}
 
-void Port::drawPort(){
+void Port::draw(){
     for(int i = 0; i<8; i++){
         move(25+i, 55);
         printw("|");
@@ -18,6 +18,11 @@ void Port::drawPort(){
         move(32, 55+i);
         printw("-");
     }
+
+  for(int i = 0; i < passangerCount; i++) {
+    move(20, 60 - i);
+    printw("w");
+  }
 }
 
  int Port::getPromInsideId(){
@@ -29,3 +34,5 @@ void Port::drawPort(){
   bool Port::isPromInside(){
       return this->promInside; 
   }
+
+void Port::addPassanger() { passangerCount++; }
