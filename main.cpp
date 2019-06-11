@@ -85,12 +85,19 @@ void moveProm(Prom *prom){
     //          }
     // }
     // else{
+    
+    if(prom->promIsByTheShore() && port->isPromInside()==false){
+        prom->promToPort();
+        port->setPromInsideId(prom->id);
+        port->setPromInside(true);
+        prom->inPort=true;
+    }else{
      prom->moveProm();
      usleep(90000);
      }
     
  }
-//}
+}
 
 void makeNewProm(){
     
@@ -130,8 +137,13 @@ void movePassanger(Passanger *passanger){
     myfile.open ("output.txt");
     myfile << "Writing this to a file.\n";
     myfile<<"Ball pos x"<<passanger->x<<"ball pos y"<<passanger->y<<endl; 
-    myfile<<"Queue"<<PassangerQueue.q.size();
-    myfile<<"Queue proms"<<promsQueue.q.size();
+    myfile<<"Queue"<<PassangerQueue.q.size()<<endl;
+    myfile<<"Queue proms"<<promsQueue.q.size()<<endl;
+    myfile<<"Port info id"<<port->getPromInsideId()<<endl;
+    myfile<<"Port info bool"<<port->isPromInside()<<endl;
+
+
+
     myfile.close();
      
      passanger->movePassanger();

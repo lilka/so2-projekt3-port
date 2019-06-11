@@ -36,14 +36,16 @@ void Prom::moveProm() {
         yVectora *= -1;
     }
 
-   if(y <= 138){
+   if(y <= 188){
          yVectora *= -1;
     
     }
-    if (y==138){
-       // numberOfPeople=0;
-    }
-   
+    // if (y==138){
+    //    // numberOfPeople=0;
+    // }
+   if (y==69){
+       promToPort();
+   }
 }
 
 void Prom::drawProm() {
@@ -98,6 +100,10 @@ void Prom::drawProm() {
        
     // }
     // else{
+    while(inPort==true){
+        move(27,57);
+        printw("(            )");
+    }
     move(x,y);
     printw("(            )");
    // }
@@ -119,7 +125,6 @@ bool Prom::isFull(){
  void Prom::promToPort(){
      move(27,57);
      printw("(            )");
-     inPort=true;
  }
 
  void Prom::addPassanger(){

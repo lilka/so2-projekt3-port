@@ -25,10 +25,15 @@ void Port::drawPort(){
 
  int Port::getPromInsideId(){
      return promInsideId;
- }
+}
   void Port::setPromInsideId(int Id){
      this->promInsideId=Id;
-  }
+}
   bool Port::isPromInside(){
       return this->promInside; 
+}
+  void Port::setPromInside(bool is){
+      this->promInside=is;
   }
+
+  

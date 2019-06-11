@@ -5,7 +5,8 @@ public:
   Port();
   void drawPort(); 
   int getPromInsideId();
-  void setPromInsideId(int Id);
+  void setPromInsideId(int);
   bool isPromInside(); 
+  void setPromInside(bool);
 
 };

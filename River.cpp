@@ -24,7 +24,7 @@ void River::drawRiver() {
 void River::drawSecondRiver() {
     
    for(int i =0;i<56;i++){
-        move(0+i,150); 
+        move(0+i,200); 
         printw("|");
     }
 }
