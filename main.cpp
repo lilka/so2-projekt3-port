@@ -73,8 +73,12 @@ void makeRiver(){
 
 void moveProm(Prom *prom){
   while((flag)){
-    prom->moveProm();
-    usleep(90000);
+    if(prom->shouldWaitForPassangers()) {
+      port->packProm(prom);
+    } else {
+      prom->moveProm();
+      usleep(90000);
+    }
   }
 }
 
@@ -91,10 +95,9 @@ void movePassanger(Passanger *passanger){
   ){
     ofstream myfile;
     myfile.open ("output.txt");
-    myfile << "Writing this to a file.\n";
-    myfile<<"Ball pos x"<<passanger->x<<"ball pos y"<<passanger->y<<endl; 
-    myfile<<"Queue"<<PassangerQueue.q.size();
-    myfile<<"Queue proms"<<promsQueue.q.size();
+    myfile<<"X: "<<proms[0]->x<< " Y: "<<proms[0]->y<<endl; 
+    //myfile<<"Queue"<<PassangerQueue.q.size();
+    //myfile<<"Queue proms"<<promsQueue.q.size();
     myfile.close();
      
     passanger->movePassanger();

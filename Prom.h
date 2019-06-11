@@ -1,32 +1,31 @@
+#ifndef PROM_H
+#define PROM_H
+
 #include <vector> 
-#include "Port.h"
 
 class Prom {
+    int passangerCount = 0;
+    bool promIsByTheShore();
 public:
     int x, y; 
     int id;
     float screenX, screenY;
     //wspolrzedne wektora przesuniecia
     int xVectora, yVectora;
-    int numberOfPeople=0;
     bool inPort=false; 
-   // std::vector<People *> people;
     
-
-    
-
     Prom( int, int, int);
     ~Prom();
     void moveProm();
     void drawProm();
+    bool shouldWaitForPassangers();
     bool isFull();
-    bool promIsByTheShore();
     void promToPort();
     void addPassanger(); 
-    bool shouldWaitForPassanger();
+    int getSeatsLeft();
     int getPromId();
-    bool enterPort(Port*);  
-    
+    void addPassangers(int);    
 
 };
 
+#endif

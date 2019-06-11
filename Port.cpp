@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include "Port.h"
+#include "Prom.h"
 
 Port::Port(){}
 
@@ -25,14 +26,38 @@ void Port::draw(){
   }
 }
 
- int Port::getPromInsideId(){
-     return promInsideId;
- }
-  void Port::setPromInsideId(int Id){
-     this->promInsideId=Id;
+void Port::addPassanger() { passangerCount++; }
+
+int Port::releasePassangers(int max) {
+  int released;
+
+  if (passangerCount >= max) {
+    released = max;
+    passangerCount -= max;
   }
-  bool Port::isPromInside(){
-      return this->promInside; 
+  else {
+    released = passangerCount;
+    passangerCount = 0;
   }
 
-void Port::addPassanger() { passangerCount++; }
+  return released;
+}
+
+void Port::packProm(Prom* prom) {
+  promMutex.lock();
+
+  if (promInside == NULL)
+    promInside = prom;
+
+  if (promInside == prom) {
+    int releasedPassangers = releasePassangers(prom->getSeatsLeft());
+    prom->addPassangers(releasedPassangers);
+
+    if (prom->isFull()) {
+      promInside = NULL;
+    }
+  }
+
+  promMutex.unlock();
+}
+

@@ -1,18 +1,19 @@
 #ifndef PORT_H
 #define PORT_H
 
+#include <mutex>
+#include "Prom.h"
+
 class Port{
-  bool promInside=false;
-  int promInsideId=-1; 
+  std::mutex promMutex;
   int passangerCount = 0;
+  Prom* promInside = NULL;
 public:
   Port();
   void draw(); 
-  int getPromInsideId();
-  void setPromInsideId(int Id);
-  bool isPromInside(); 
+  void packProm(Prom* p);
   void addPassanger();
-
+  int releasePassangers(int max);
 };
 
 #endif

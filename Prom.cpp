@@ -1,6 +1,8 @@
 #include <ncurses.h>
 #include "Prom.h"
 
+const int PASSANGERS_MAX = 3;
+
 Prom::Prom( int initX, int initY, int newId) {
    
 
@@ -17,10 +19,8 @@ Prom::Prom( int initX, int initY, int newId) {
 }
 
 void Prom::moveProm() {
-   
-
-    x += xVectora;
-    y += yVectora;
+  x += xVectora;
+  y += yVectora;
 
 
    if( x>= screenX ) {
@@ -47,73 +47,32 @@ void Prom::moveProm() {
 }
 
 void Prom::drawProm() {
-    // if(promIsByTheShore()==true && (isFull()==false)){
-    //     if(numberOfPeople==0){
-    //      //   promToPort();
-    //     }
-    //     if(numberOfPeople==1){
-    //         move(27,57);
-    //        printw("(p           )");
-    //        }
-    //     if(numberOfPeople==2){
-    //         move(27,57);
-    //        printw("(pp        )");
-    //        }
-    //     if(numberOfPeople==3){
-    //         move(27,57);
-    //        printw("(ppp      )");
-    //        }
-    //     if(numberOfPeople==4){
-    //         move(27,57);
-    //        printw("(pppp     )");
-    //        }
-    //     if(numberOfPeople==5){
-    //         move(27,57);
-    //        printw("(ppppp     )");
-    //        }
-    //     if(numberOfPeople==6){
-    //         move(27,57);
-    //        printw("(ppppp     )");
-    //        }
-    //     if(numberOfPeople==7){
-    //         move(27,57);
-    //        printw("(pppppp    )");
-    //        }
-    //      if(numberOfPeople==8){
-    //         move(27,57);
-    //        printw("(ppppppp    )");
-    //        }
-    //     if(numberOfPeople==9){
-    //         move(27,57);
-    //        printw("(pppppppp    )");
-    //        }
-        
-         
-         
-        
-    // }
-    // else if(isFull()==true){
-    //     move(x,y);
-    //     printw("(pppppppp    )");
-       
-    // }
-    // else{
-    move(x,y);
+  move(x,y);
+
+  if (passangerCount > 0) {
+    printw("(");
+    for (int i = 1; i <= passangerCount; i++) {
+      move(x, y + i);
+      printw("P");
+    }
+    move(x, y + passangerCount + 1);
+    printw(")");
+  }
+  else {
     printw("(            )");
-   // }
+  }
+}
 
- }
-
- bool Prom::shouldWaitForPassanger(){
-     return !isFull() && promIsByTheShore(); 
- }
+bool Prom::shouldWaitForPassangers(){
+  return !isFull() && promIsByTheShore(); 
+}
 
 bool Prom::isFull(){
-    return this->numberOfPeople==10;  
+  return passangerCount == PASSANGERS_MAX;
 }
 
  bool Prom::promIsByTheShore(){
-     return (x==0 && y==69);
+   return y == 69;
 }
 
  void Prom::promToPort(){
@@ -122,10 +81,13 @@ bool Prom::isFull(){
      inPort=true;
  }
 
- void Prom::addPassanger(){
-      numberOfPeople++; 
-      
+ void Prom::addPassangers(int count){
+   passangerCount += count;
  }
+
+int Prom::getSeatsLeft() {
+  return PASSANGERS_MAX - passangerCount;
+}
 
  int Prom::getPromId(){
      return id; 
